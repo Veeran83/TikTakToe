@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+  
+<head>
+  <style>
+  h1 {
+    color:white;  
+    background-color:black;
+    font-family:arial;
+    text-align:center; }
+  body {
+      color:red;
+      background-color:lightblue;
+      //text-align:center;
+      font-family:arial;
+   }
+
+  </style>
+
+</head>
+
+
+<body> 
+  <h1>Jave Code for Tik-Tak-Toe game by veeran</h1>
+  <p>
+   import java.util.Arrays;<br>
+   import java.util.InputMismatchException; <br>
+   import java.util.Scanner;<br>
+<br>
+   /**<br>
+   * <br>
+   * @author Veeran<br>
+   *<br>
+   */<br>
+   public class TicTacToe {<br>
+   static Scanner in;<br>
+   static String[] board;<br>
+   static String turn;<br>
+
+   public static void main(String[] args) {  <br>
+	in = new Scanner(System.in);  <br>
+	board = new String[9];    <br>
+	turn = "X"; <br>
+	String winner = null; <br>
+	populateEmptyBoard();  <br>
+<br>
+	System.out.println("Welcome to 2 Player Tic Tac Toe."); <br>
+	System.out.println("--------------------------------"); <br>
+	printBoard(); <br>
+	System.out.println("X's will play first. Enter a slot number to place X in:"); <br>
+<br>
+	while (winner == null) 
+        {                 <br>
+	int numInput;   <br>
+	try {       <br>
+	numInput = in.nextInt();  <br>
+	if (!(numInput > 0 && numInput <= 9)) {   <br>
+	System.out.println("Invalid input; re-enter slot number:");   <br>
+	continue;      <br>
+	}       <br>
+	} catch (InputMismatchException e) {   <br>
+	System.out.println("Invalid input; re-enter slot number:");   <br>
+	continue;  <br>
+	}       <br>
+	if (board[numInput-1].equals(String.valueOf(numInput)))  <br>
+        {     <br>
+	board[numInput-1] = turn;         <br>
+	if (turn.equals("X"))          <br>
+        {              <br>
+	turn = "O";             <br>
+	} else {             <br>
+	turn = "X";      <br>
+	}              <br>
+	printBoard();          <br>
+	winner = checkWinner();           <br>
+	} else {          <br>
+	System.out.println("Slot already taken; re-enter slot number:");       <br>
+	continue;            <br>
+	}          <br>
+	}        <br>
+	if (winner.equalsIgnoreCase("draw")) {         <br>
+	System.out.println("It's a draw! Thanks for playing.");         <br>
+	} else {         <br>
+	System.out.println("Congratulations! " + winner + "'s have won! Thanks for playing.");       <br>
+	}        <br>
+	}         <br>
+<br>
+	static String checkWinner() {           <br>
+	for (int a = 0; a < 8; a++) {          <br>
+	String line = null;             <br>
+	switch (a) {            <br>
+	case 0:              <br>
+	line = board[0] + board[1] + board[2];         <br>
+	break;            <br>
+	case 1:         <br>
+	line = board[3] + board[4] + board[5];         <br>
+	break;         <br>
+	case 2:        <br>
+	line = board[6] + board[7] + board[8];        <br>
+	break;           <br>
+	case 3:        <br>
+	line = board[0] + board[3] + board[6];         <br>
+	break;                <br>
+	case 4:                            <br>
+	line = board[1] + board[4] + board[7];       <br>
+	break;            <br>
+	case 5:            <br>
+	line = board[2] + board[5] + board[8];        <br>
+	break;           <br>
+	case 6:             <br>
+	line = board[0] + board[4] + board[8];          <br>
+	break;          <br>
+	case 7:           <br>
+	line = board[2] + board[4] + board[6];         <br>
+	break;        <br>
+	}           <br>
+	if (line.equals("XXX")) {         <br>
+	return "X";        <br> 
+	} else if (line.equals("OOO")) {         <br>
+	return "O";       <br>
+	}         <br>
+	}           <br>
+<br> 
+	for (int a = 0; a < 9; a++) {           <br>
+	if (Arrays.asList(board).contains(String.valueOf(a+1))) {        <br>
+	break;       <br>
+	}       <br>
+	else if (a == 8) return "draw";       <br>
+	}       <br>
+	System.out.println(turn + "'s turn; enter a slot number to place " + turn + " in:");       <br>
+	return null;       <br>
+	}       <br>
+       <br>
+	static void printBoard() {       <br>       
+		System.out.println("/---|---|---\\");       <br>
+		System.out.println("| " + board[0] + " | " + board[1] + " | " + board[2] + " |");       <br>
+		System.out.println("|-----------|");       <br>
+		System.out.println("| " + board[3] + " | " + board[4] + " | " + board[5] + " |");       <br>
+		System.out.println("|-----------|");       <br>
+		System.out.println("| " + board[6] + " | " + board[7] + " | " + board[8] + " |");       <br>
+		System.out.println("/---|---|---\\");       <br>
+	}       <br>
+       <br>
+	static void populateEmptyBoard() {       <br>
+		for (int a = 0; a < 9; a++) {       <br>
+			board[a] = String.valueOf(a+1);       <br>
+		}       <br>
+	}       <br>
+     }       <br>
+  </p>       
+       
+</body>
+ 
+
+
+</html>
